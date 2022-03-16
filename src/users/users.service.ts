@@ -7,17 +7,37 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
+  private readonly _include = {
+    posts: {
+      select: {
+        title: true,
+        content: true,
+      },
+    },
+  };
+
   create(data: CreateUserDto) {
-    return this.prisma.user.create({ data });
+    return this.prisma.user.create({
+      data,
+      include: this._include,
+    });
   }
 
   findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      include: this._include,
+      orderBy: [
+        {
+          name: 'asc',
+        },
+      ],
+    });
   }
 
   findOne(id: number) {
     return this.prisma.user.findUnique({
       where: { id },
+      include: this._include,
     });
   }
 
@@ -25,6 +45,7 @@ export class UsersService {
     return this.prisma.user.update({
       where: { id },
       data,
+      include: this._include,
     });
   }
 
