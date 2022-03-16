@@ -8,6 +8,6 @@ import { PostsModule } from './posts/posts.module';
 @Module({
   imports: [UsersModule, PostsModule],
   controllers: [AppController],
-  providers: [AppService, PostsService],
+  providers: [AppService],
 })
 export class AppModule {}
