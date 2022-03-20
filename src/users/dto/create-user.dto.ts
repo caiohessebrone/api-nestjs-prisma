@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import { Post } from '@nestjs/common';
 import {
   IsEmail,
+  IsEnum,
   IsOptional,
   IsString,
   MaxLength,
@@ -21,6 +22,12 @@ export class CreateUserDto extends User {
 
   @IsEmail()
   email: string;
+
+  @IsEnum(['ON', 'OFF', 'ABSENT'])
+  status: 'ON' | 'OFF' | 'ABSENT';
+
+  @IsString()
+  photoPerfil: string;
 
   @IsOptional()
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput;

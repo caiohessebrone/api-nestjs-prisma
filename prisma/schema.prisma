@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id     Int     @id @default(autoincrement())
-  email  String  @unique
-  name   String?
-  status Status  @default(OFF)
-  posts  Post[]
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  name        String?
+  photoPerfil String  @default("https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg")
+  status      Status  @default(OFF)
+  posts       Post[]
 }
 
 model Post {
