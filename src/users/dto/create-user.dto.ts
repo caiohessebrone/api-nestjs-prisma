@@ -23,6 +23,9 @@ export class CreateUserDto extends User {
   @IsEmail()
   email: string;
 
+  @IsString()
+  password: string;
+
   @IsEnum(['ON', 'OFF', 'ABSENT'])
   status: 'ON' | 'OFF' | 'ABSENT';
 

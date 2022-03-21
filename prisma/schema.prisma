@@ -11,12 +11,14 @@ datasource db {
 }
 
 model User {
-  id          Int     @id @default(autoincrement())
-  email       String  @unique
-  name        String?
-  photoPerfil String  @default("https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg")
-  status      Status  @default(OFF)
-  posts       Post[]
+  id            Int           @id @default(autoincrement())
+  email         String        @unique
+  password      String
+  name          String?
+  photoPerfil   String        @default("https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg")
+  status        Status        @default(OFF)
+  posts         Post[]
+  autentication RefreshToken?
 }
 
 model Post {
@@ -26,6 +28,14 @@ model Post {
   published Boolean? @default(false)
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
+}
+
+model RefreshToken {
+  id         Int      @id @default(autoincrement())
+  user_id    User?    @relation(fields: [userId], references: [id])
+  userId     Int?     @unique
+  is_revoked Boolean
+  expires    DateTime
 }
 
 enum Status {
